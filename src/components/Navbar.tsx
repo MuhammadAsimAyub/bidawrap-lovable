@@ -1,7 +1,15 @@
 import { useState } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface NavbarProps {
   onGetBidClick: () => void;
@@ -10,14 +18,15 @@ interface NavbarProps {
 const Navbar = ({ onGetBidClick }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { user, isAuthenticated, signOut } = useAuth();
+  const navigate = useNavigate();
 
   const navLinks = [
-    { label: "Home", href: "#home" },
-    { label: "Happy Stories", href: "#stories" },
-    { label: "About Us", href: "#about" },
-    { label: "Locate Shops", href: "#shops" },
-    { label: "Join Our Network", href: "#join" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Home", href: "/" },
+    { label: "Happy Stories", href: "/happy-stories" },
+    { label: "About Us", href: "/about" },
+    { label: "Locate Shops", href: "/locate-shops" },
+    { label: "Join Our Network", href: "/join-network" },
   ];
 
   return (
@@ -35,13 +44,14 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <a
+              <Button
                 key={link.label}
-                href={link.href}
-                className="px-3 py-2 rounded-md text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-accent/50 transition-colors"
+                variant="ghost"
+                onClick={() => navigate(link.href)}
+                className="text-foreground/80 hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Button>
             ))}
           </div>
 
@@ -64,6 +74,39 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
               Get a Bid
             </Button>
 
+            {/* Account Dropdown */}
+            <div className="hidden sm:block">
+              {isAuthenticated ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="rounded-full">
+                      {user?.avatar ? (
+                        <img
+                          src={user.avatar}
+                          alt={user.name}
+                          className="w-8 h-8 rounded-full"
+                        />
+                      ) : (
+                        <User className="h-5 w-5" />
+                      )}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48 bg-card border-border">
+                    <DropdownMenuItem onClick={() => navigate("/dashboard")} className="cursor-pointer">
+                      Dashboard
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={signOut} className="cursor-pointer">
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button variant="ghost" onClick={() => navigate("/auth")}>
+                  Sign In
+                </Button>
+              )}
+            </div>
+
             {/* Mobile Menu Button */}
             <Button
               variant="ghost"
@@ -80,30 +123,70 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
         {isMenuOpen && (
           <div className="lg:hidden py-4 space-y-2 border-t border-border">
             {navLinks.map((link) => (
-              <a
+              <Button
                 key={link.label}
-                href={link.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-foreground/80 hover:text-foreground hover:bg-accent/50 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                variant="ghost"
+                onClick={() => {
+                  navigate(link.href);
+                  setIsMenuOpen(false);
+                }}
+                className="w-full justify-start text-foreground/80"
               >
                 {link.label}
-              </a>
+              </Button>
             ))}
-            <div className="pt-2 flex items-center space-x-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              >
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </Button>
-              <Button onClick={onGetBidClick} className="btn-primary flex-1">
-                Get a Bid
-              </Button>
+            <div className="pt-2 space-y-2">
+              <div className="flex items-center space-x-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                >
+                  {theme === "dark" ? (
+                    <Sun className="h-5 w-5" />
+                  ) : (
+                    <Moon className="h-5 w-5" />
+                  )}
+                </Button>
+                <Button onClick={onGetBidClick} className="btn-primary flex-1">
+                  Get a Bid
+                </Button>
+              </div>
+              {isAuthenticated ? (
+                <div className="space-y-2 pt-2">
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      navigate("/dashboard");
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full justify-start"
+                  >
+                    Dashboard
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      signOut();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full justify-start"
+                  >
+                    Logout
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  variant="ghost"
+                  onClick={() => {
+                    navigate("/auth");
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full justify-start"
+                >
+                  Sign In
+                </Button>
+              )}
             </div>
           </div>
         )}
