@@ -1,24 +1,18 @@
-import { useState } from "react";
-import Navbar from "@/components/Navbar";
+import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
+import FeaturesSection from "@/components/FeaturesSection";
 import JoinNetworkSection from "@/components/JoinNetworkSection";
-import Footer from "@/components/Footer";
-import BiddingFormModal from "@/components/BiddingForm/BiddingFormModal";
+import { useBiddingForm } from "@/contexts/BiddingFormContext";
 
 const Index = () => {
-  const [isBiddingFormOpen, setIsBiddingFormOpen] = useState(false);
+  const { openForm } = useBiddingForm();
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar onGetBidClick={() => setIsBiddingFormOpen(true)} />
-      <HeroSection onGetBidClick={() => setIsBiddingFormOpen(true)} />
+    <Layout>
+      <HeroSection onGetBidClick={openForm} />
+      <FeaturesSection />
       <JoinNetworkSection />
-      <Footer />
-      <BiddingFormModal
-        isOpen={isBiddingFormOpen}
-        onClose={() => setIsBiddingFormOpen(false)}
-      />
-    </div>
+    </Layout>
   );
 };
 

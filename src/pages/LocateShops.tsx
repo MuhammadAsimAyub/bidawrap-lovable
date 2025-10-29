@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Layout from "@/components/Layout";
 
 const LocateShops = () => {
   const [zipCode, setZipCode] = useState("");
@@ -36,7 +37,8 @@ const LocateShops = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 py-20">
+    <Layout>
+      <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-background via-background to-primary/5 py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-4 gradient-text">Locate Shops Near You</h1>
@@ -88,7 +90,8 @@ const LocateShops = () => {
           ))}
         </div>
       </div>
-    </div>
+      </div>
+    </Layout>
   );
 };
 

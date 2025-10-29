@@ -1,6 +1,9 @@
+import Layout from "@/components/Layout";
+
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 py-20">
+    <Layout>
+      <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-background via-background to-primary/5 py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
@@ -44,7 +47,8 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </Layout>
   );
 };
 
