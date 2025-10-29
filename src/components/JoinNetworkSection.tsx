@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Store, TrendingUp, Users, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const JoinNetworkSection = () => {
+  const navigate = useNavigate();
+  
   const benefits = [
     {
       icon: Users,
@@ -58,9 +61,9 @@ const JoinNetworkSection = () => {
           <Button
             size="lg"
             className="btn-primary text-lg px-8 py-6 rounded-xl"
-            onClick={() => window.open('#network-signup', '_self')}
+            onClick={() => navigate('/partner')}
           >
-            Join Our Network Today
+            Become a Partner
           </Button>
           <p className="mt-4 text-sm text-muted-foreground">
             No setup fees • Only pay for successful jobs

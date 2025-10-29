@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { PartnerAuthProvider } from "@/contexts/PartnerAuthContext";
 import { BiddingFormProvider } from "@/contexts/BiddingFormContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -19,6 +20,14 @@ import AboutUs from "./pages/AboutUs";
 import LocateShops from "./pages/LocateShops";
 import JoinNetwork from "./pages/JoinNetwork";
 import FAQ from "./pages/FAQ";
+import PartnerAuth from "./pages/partner/PartnerAuth";
+import PlanSelection from "./pages/partner/PlanSelection";
+import BusinessRegistration from "./pages/partner/BusinessRegistration";
+import PaymentInfo from "./pages/partner/PaymentInfo";
+import PartnerDashboard from "./pages/partner/dashboard/PartnerDashboard";
+import PartnerProfile from "./pages/partner/dashboard/PartnerProfile";
+import PartnerBids from "./pages/partner/dashboard/PartnerBids";
+import PartnerChats from "./pages/partner/dashboard/PartnerChats";
 
 const queryClient = new QueryClient();
 
@@ -26,30 +35,40 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
       <AuthProvider>
-        <BiddingFormProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/dashboard/profile" element={<Profile />} />
-                <Route path="/dashboard/find-shops" element={<FindShops />} />
-                <Route path="/dashboard/bids" element={<YourBids />} />
-                <Route path="/dashboard/chats" element={<Chats />} />
-                <Route path="/happy-stories" element={<HappyStories />} />
-                <Route path="/about" element={<AboutUs />} />
-                <Route path="/locate-shops" element={<LocateShops />} />
-                <Route path="/join-network" element={<JoinNetwork />} />
-                <Route path="/faq" element={<FAQ />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </BiddingFormProvider>
+        <PartnerAuthProvider>
+          <BiddingFormProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/dashboard/profile" element={<Profile />} />
+                  <Route path="/dashboard/find-shops" element={<FindShops />} />
+                  <Route path="/dashboard/bids" element={<YourBids />} />
+                  <Route path="/dashboard/chats" element={<Chats />} />
+                  <Route path="/happy-stories" element={<HappyStories />} />
+                  <Route path="/about" element={<AboutUs />} />
+                  <Route path="/locate-shops" element={<LocateShops />} />
+                  <Route path="/join-network" element={<JoinNetwork />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/partner" element={<PartnerAuth />} />
+                  <Route path="/partner/plans" element={<PlanSelection />} />
+                  <Route path="/partner/register" element={<BusinessRegistration />} />
+                  <Route path="/partner/payment" element={<PaymentInfo />} />
+                  <Route path="/partner/dashboard" element={<PartnerDashboard />} />
+                  <Route path="/partner/dashboard/profile" element={<PartnerProfile />} />
+                  <Route path="/partner/dashboard/bids" element={<PartnerBids />} />
+                  <Route path="/partner/dashboard/chats" element={<PartnerChats />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </TooltipProvider>
+          </BiddingFormProvider>
+        </PartnerAuthProvider>
       </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>

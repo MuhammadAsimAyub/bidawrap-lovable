@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Menu, X, Sun, Moon, User } from "lucide-react";
+import { Menu, X, Sun, Moon, User, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { useAuth } from "@/contexts/AuthContext";
+import { usePartnerAuth } from "@/contexts/PartnerAuthContext";
 import { useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
@@ -19,6 +20,7 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const { user, isAuthenticated, signOut } = useAuth();
+  const { partner, isAuthenticated: isPartnerAuthenticated, signOut: partnerSignOut } = usePartnerAuth();
   const navigate = useNavigate();
 
   const navLinks = [
@@ -76,7 +78,23 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
 
             {/* Account Dropdown */}
             <div className="hidden sm:block">
-              {isAuthenticated ? (
+              {isPartnerAuthenticated ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="rounded-full">
+                      <Store className="h-5 w-5 text-primary" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48 bg-card border-border">
+                    <DropdownMenuItem onClick={() => navigate("/partner/dashboard")} className="cursor-pointer">
+                      Dashboard
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={partnerSignOut} className="cursor-pointer">
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : isAuthenticated ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="icon" className="rounded-full">
@@ -152,7 +170,30 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
                   Get a Bid
                 </Button>
               </div>
-              {isAuthenticated ? (
+              {isPartnerAuthenticated ? (
+                <div className="space-y-2 pt-2">
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      navigate("/partner/dashboard");
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full justify-start"
+                  >
+                    Partner Dashboard
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      partnerSignOut();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full justify-start"
+                  >
+                    Logout
+                  </Button>
+                </div>
+              ) : isAuthenticated ? (
                 <div className="space-y-2 pt-2">
                   <Button
                     variant="ghost"
