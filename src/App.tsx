@@ -10,6 +10,10 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/dashboard/Profile";
+import FindShops from "./pages/dashboard/FindShops";
+import YourBids from "./pages/dashboard/YourBids";
+import Chats from "./pages/dashboard/Chats";
 import HappyStories from "./pages/HappyStories";
 import AboutUs from "./pages/AboutUs";
 import LocateShops from "./pages/LocateShops";
@@ -31,6 +35,10 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard/profile" element={<Profile />} />
+                <Route path="/dashboard/find-shops" element={<FindShops />} />
+                <Route path="/dashboard/bids" element={<YourBids />} />
+                <Route path="/dashboard/chats" element={<Chats />} />
                 <Route path="/happy-stories" element={<HappyStories />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/locate-shops" element={<LocateShops />} />
