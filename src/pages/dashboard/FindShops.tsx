@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { MapPin, Star, Phone } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import ShopMap from "@/components/ShopMap";
 
 const FindShops = () => {
   const [selectedShop, setSelectedShop] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const shops = [
     {
@@ -41,70 +42,61 @@ const FindShops = () => {
     },
   ];
 
+  const filteredShops = shops.filter((shop) =>
+    shop.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    shop.address?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <DashboardLayout>
       <div>
         <h1 className="text-3xl font-bold mb-2">Find Shops</h1>
-        <p className="text-muted-foreground mb-8">
+        <p className="text-muted-foreground mb-6">
           Discover trusted repair shops in your area
         </p>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-[400px_1fr] gap-4 h-[calc(100vh-250px)]">
           {/* Shop List */}
-          <div className="space-y-6">
-            {shops.map((shop) => (
-              <Card
-                key={shop.id}
-                className={`p-6 cursor-pointer transition-all ${
-                  selectedShop === shop.id ? "ring-2 ring-primary" : ""
-                }`}
-                onClick={() => setSelectedShop(shop.id)}
-              >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">{shop.name}</h3>
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4" />
-                        <span>{shop.address}</span>
-                        <span className="text-primary">• {shop.distance}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Phone className="h-4 w-4" />
-                        <span>{shop.phone}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Star className="h-4 w-4 fill-primary text-primary" />
-                        <span className="font-semibold text-foreground">
-                          {shop.rating}
-                        </span>
-                        <span>rating</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {shop.specialties.map((specialty) => (
-                        <span
-                          key={specialty}
-                          className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium"
-                        >
-                          {specialty}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <Button>Request Quote</Button>
-                    <Button variant="outline">View Details</Button>
+          <div className="flex flex-col bg-card border rounded-lg overflow-hidden">
+            {/* Search Box */}
+            <div className="p-4 border-b">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-9"
+                />
+              </div>
+            </div>
+
+            {/* Scrollable Shop List */}
+            <div className="flex-1 overflow-y-auto">
+              {filteredShops.map((shop) => (
+                <div
+                  key={shop.id}
+                  className={`p-4 border-b cursor-pointer hover:bg-accent/50 transition-colors ${
+                    selectedShop === shop.id ? "bg-accent" : ""
+                  }`}
+                  onClick={() => setSelectedShop(shop.id)}
+                >
+                  <h3 className="font-semibold mb-1">{shop.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-2">{shop.address}</p>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <span className="text-primary font-semibold">★ {shop.rating}</span>
+                    <span>• {shop.distance}</span>
                   </div>
                 </div>
-              </Card>
-            ))}
+              ))}
+            </div>
           </div>
 
           {/* Interactive Map */}
-          <div className="lg:sticky lg:top-8 h-fit">
+          <div className="h-full">
             <ShopMap
-              shops={shops}
+              shops={filteredShops}
               onShopSelect={(shop) => setSelectedShop(shop.id)}
             />
           </div>

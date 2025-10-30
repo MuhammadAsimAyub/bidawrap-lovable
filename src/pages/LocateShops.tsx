@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import ShopMap from "@/components/ShopMap";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 const LocateShops = () => {
   const [selectedShop, setSelectedShop] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const shops = [
     {
@@ -44,70 +47,62 @@ const LocateShops = () => {
     },
   ];
 
+  const filteredShops = shops.filter((shop) =>
+    shop.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    shop.address?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <Layout>
-      <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-background via-background to-primary/5 py-20">
+      <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-background via-background to-primary/5 py-12">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-4 gradient-text">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold mb-2 gradient-text">
               Locate Shops Near You
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground">
               Find verified wrap and detailing shops in your area
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-[400px_1fr] gap-4 max-w-7xl mx-auto h-[calc(100vh-280px)]">
             {/* Shop List */}
-            <div className="space-y-6">
-              {shops.map((shop) => (
-                <div
-                  key={shop.id}
-                  className={`bg-card border rounded-2xl overflow-hidden card-hover cursor-pointer transition-all ${
-                    selectedShop === shop.id ? "ring-2 ring-primary" : ""
-                  }`}
-                  onClick={() => setSelectedShop(shop.id)}
-                >
-                  <img
-                    src={shop.image}
-                    alt={shop.name}
-                    className="w-full h-48 object-cover"
+            <div className="flex flex-col bg-card border rounded-lg overflow-hidden">
+              {/* Search Box */}
+              <div className="p-4 border-b">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-9"
                   />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2">{shop.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {shop.address}
-                    </p>
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-primary text-lg">
-                        ★ {shop.rating}
-                      </span>
-                      <span className="text-muted-foreground text-sm">
-                        ({shop.reviews} reviews)
-                      </span>
-                      <span className="text-muted-foreground text-sm">
-                        • {shop.distance}
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {shop.services.map((service) => (
-                        <span
-                          key={service}
-                          className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium"
-                        >
-                          {service}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Scrollable Shop List */}
+              <div className="flex-1 overflow-y-auto">
+                {filteredShops.map((shop) => (
+                  <div
+                    key={shop.id}
+                    className={`p-4 border-b cursor-pointer hover:bg-accent/50 transition-colors ${
+                      selectedShop === shop.id ? "bg-accent" : ""
+                    }`}
+                    onClick={() => setSelectedShop(shop.id)}
+                  >
+                    <h3 className="font-semibold mb-1">{shop.name}</h3>
+                    <p className="text-sm text-muted-foreground">{shop.address}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Interactive Map */}
-            <div className="lg:sticky lg:top-24 h-fit">
+            <div className="h-full">
               <ShopMap
-                shops={shops}
+                shops={filteredShops}
                 onShopSelect={(shop) => setSelectedShop(shop.id)}
               />
             </div>
