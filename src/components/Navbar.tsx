@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { useAuth } from "@/contexts/AuthContext";
 import { usePartnerAuth } from "@/contexts/PartnerAuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +22,7 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
   const { user, isAuthenticated, signOut } = useAuth();
   const { partner, isAuthenticated: isPartnerAuthenticated, signOut: partnerSignOut } = usePartnerAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -37,28 +38,37 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-[hsl(75,100%,45%)] flex items-center justify-center font-bold text-primary-foreground text-xl">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-primary to-[hsl(75,100%,45%)] flex items-center justify-center font-bold text-primary-foreground text-lg sm:text-xl">
               W
             </div>
-            <span className="ml-2 text-xl font-bold">WrapBid</span>
+            <span className="ml-2 text-lg sm:text-xl font-bold">WrapBid</span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <Button
-                key={link.label}
-                variant="ghost"
-                onClick={() => navigate(link.href)}
-                className="text-foreground/80 hover:text-foreground"
-              >
-                {link.label}
-              </Button>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.href;
+              return (
+                <div key={link.label} className="relative">
+                  <Button
+                    variant="ghost"
+                    onClick={() => navigate(link.href)}
+                    className={`text-foreground/80 hover:text-foreground hover:bg-primary/10 transition-colors ${
+                      isActive ? "text-foreground" : ""
+                    }`}
+                  >
+                    {link.label}
+                  </Button>
+                  {isActive && (
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-0.5 bg-primary rounded-full" />
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             <Button
               variant="ghost"
               size="icon"
@@ -72,16 +82,40 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
               )}
             </Button>
 
+            {/* Theme Toggle for Mobile - visible on small screens */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="sm:hidden"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </Button>
+
             <Button onClick={onGetBidClick} className="btn-primary hidden sm:flex">
               Get a Bid
             </Button>
 
-            {/* Account Dropdown */}
-            <div className="hidden sm:block">
-              {isPartnerAuthenticated ? (
+            {/* Account Button/Dropdown */}
+            {isPartnerAuthenticated ? (
+              <>
+                {/* Mobile - Direct button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="sm:hidden rounded-full"
+                  onClick={() => navigate("/partner/dashboard")}
+                >
+                  <Store className="h-5 w-5 text-primary" />
+                </Button>
+                {/* Desktop - Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="rounded-full">
+                    <Button variant="ghost" size="icon" className="hidden sm:flex rounded-full">
                       <Store className="h-5 w-5 text-primary" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -94,10 +128,30 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              ) : isAuthenticated ? (
+              </>
+            ) : isAuthenticated ? (
+              <>
+                {/* Mobile - Direct button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="sm:hidden rounded-full"
+                  onClick={() => navigate("/dashboard")}
+                >
+                  {user?.avatar ? (
+                    <img
+                      src={user.avatar}
+                      alt={user.name}
+                      className="w-8 h-8 rounded-full"
+                    />
+                  ) : (
+                    <User className="h-5 w-5" />
+                  )}
+                </Button>
+                {/* Desktop - Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="rounded-full">
+                    <Button variant="ghost" size="icon" className="hidden sm:flex rounded-full">
                       {user?.avatar ? (
                         <img
                           src={user.avatar}
@@ -118,12 +172,12 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              ) : (
-                <Button variant="ghost" onClick={() => navigate("/auth")}>
-                  Sign In
-                </Button>
-              )}
-            </div>
+              </>
+            ) : (
+              <Button variant="ghost" onClick={() => navigate("/auth")} className="text-sm px-2 sm:px-4">
+                Sign In
+              </Button>
+            )}
 
             {/* Mobile Menu Button */}
             <Button
@@ -140,92 +194,57 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="lg:hidden py-4 space-y-2 border-t border-border">
-            {navLinks.map((link) => (
-              <Button
-                key={link.label}
-                variant="ghost"
-                onClick={() => {
-                  navigate(link.href);
-                  setIsMenuOpen(false);
-                }}
-                className="w-full justify-start text-foreground/80"
-              >
-                {link.label}
-              </Button>
-            ))}
-            <div className="pt-2 space-y-2">
-              <div className="flex items-center space-x-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                >
-                  {theme === "dark" ? (
-                    <Sun className="h-5 w-5" />
-                  ) : (
-                    <Moon className="h-5 w-5" />
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.href;
+              return (
+                <div key={link.label} className="relative">
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      navigate(link.href);
+                      setIsMenuOpen(false);
+                    }}
+                    className={`w-full justify-start text-foreground/80 hover:text-foreground hover:bg-primary/10 ${
+                      isActive ? "text-foreground bg-primary/5" : ""
+                    }`}
+                  >
+                    {link.label}
+                  </Button>
+                  {isActive && (
+                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-3/4 bg-primary rounded-full" />
                   )}
-                </Button>
-                <Button onClick={onGetBidClick} className="btn-primary flex-1">
-                  Get a Bid
-                </Button>
-              </div>
-              {isPartnerAuthenticated ? (
-                <div className="space-y-2 pt-2">
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      navigate("/partner/dashboard");
-                      setIsMenuOpen(false);
-                    }}
-                    className="w-full justify-start"
-                  >
-                    Partner Dashboard
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      partnerSignOut();
-                      setIsMenuOpen(false);
-                    }}
-                    className="w-full justify-start"
-                  >
-                    Logout
-                  </Button>
                 </div>
-              ) : isAuthenticated ? (
-                <div className="space-y-2 pt-2">
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      navigate("/dashboard");
-                      setIsMenuOpen(false);
-                    }}
-                    className="w-full justify-start"
-                  >
-                    Dashboard
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      signOut();
-                      setIsMenuOpen(false);
-                    }}
-                    className="w-full justify-start"
-                  >
-                    Logout
-                  </Button>
-                </div>
-              ) : (
+              );
+            })}
+            <div className="pt-2">
+              <Button onClick={onGetBidClick} className="btn-primary w-full">
+                Get a Bid
+              </Button>
+              
+              {/* Logout button for authenticated users on mobile */}
+              {isPartnerAuthenticated && (
                 <Button
                   variant="ghost"
                   onClick={() => {
-                    navigate("/auth");
+                    partnerSignOut();
                     setIsMenuOpen(false);
                   }}
-                  className="w-full justify-start"
+                  className="w-full justify-start mt-2"
                 >
-                  Sign In
+                  Logout
+                </Button>
+              )}
+              
+              {isAuthenticated && !isPartnerAuthenticated && (
+                <Button
+                  variant="ghost"
+                  onClick={() => {
+                    signOut();
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full justify-start mt-2"
+                >
+                  Logout
                 </Button>
               )}
             </div>

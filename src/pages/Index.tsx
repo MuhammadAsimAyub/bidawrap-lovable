@@ -11,7 +11,7 @@ const Index = () => {
     <Layout>
       <HeroSection onGetBidClick={openForm} />
       <FeaturesSection />
-      <JoinNetworkSection />
+      {/* <JoinNetworkSection /> */}
     </Layout>
   );
 };
