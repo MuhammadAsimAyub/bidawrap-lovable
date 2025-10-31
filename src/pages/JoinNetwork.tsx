@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import carImage from "@/assets/bg-car.avif";
+import { useNavigate } from "react-router-dom";
 
 
 const JoinNetwork = () => {
@@ -24,6 +25,7 @@ const JoinNetwork = () => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const statsRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -157,7 +159,7 @@ const JoinNetwork = () => {
                 No commissions. No hidden fees. Just honest connections.
               </p>
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => navigate("/partner")}
                 className="px-10 py-5 bg-primary text-primary-foreground rounded-lg font-bold text-lg hover:bg-primary/90 transition-all hover:scale-105 shadow-2xl"
               >
                 Join as a Shop Partner
@@ -302,7 +304,7 @@ const JoinNetwork = () => {
                 Start receiving quality leads today!
               </p>
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => navigate("/partner")}
                 className="px-10 py-5 bg-background text-foreground rounded-lg font-bold text-lg hover:bg-background/90 transition-all hover:scale-105 shadow-lg"
               >
                 Get Started - It's Free

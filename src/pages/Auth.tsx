@@ -60,7 +60,7 @@ const Auth = () => {
 
   return (
     <Layout>
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-br from-background via-background to-primary/5 px-4">
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-br from-background via-background to-primary/5 px-4 pb-4 pt-8">
       <div className="w-full max-w-md">
         <div className="bg-card border border-border rounded-2xl shadow-elegant p-8">
           <div className="text-center mb-8">

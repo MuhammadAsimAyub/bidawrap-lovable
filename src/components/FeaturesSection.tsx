@@ -339,7 +339,7 @@ const FeaturesSection = () => {
               </div>
               
               <Button
-                onClick={() => navigate("/join-network")}
+                onClick={() => navigate("/partner")}
                 className="btn-primary w-full sm:w-auto group"
                 size="lg"
               >

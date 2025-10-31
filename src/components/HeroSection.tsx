@@ -10,7 +10,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ onGetBidClick }: HeroSectionProps) => {
-  const navgate = useNavigate();
+  const navigate = useNavigate();
   return (
     <section
       id="home"
@@ -59,9 +59,7 @@ const HeroSection = ({ onGetBidClick }: HeroSectionProps) => {
                 variant="outline"
                 className="text-base md:text-lg px-6 md:px-8 py-4 md:py-6 rounded-xl border-2 hover:shadow-lg hover:scale-105 transition-transform duration-300"
                 onClick={() =>
-                  document
-                    .getElementById("join")
-                    ?.scrollIntoView({ behavior: "smooth" })
+                  navigate("/partner")
                 }
               >
                 Join as a Shop

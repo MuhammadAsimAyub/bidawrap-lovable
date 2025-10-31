@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Star } from "lucide-react";
+import { useBiddingForm } from "@/contexts/BiddingFormContext";
 
 const HappyStories = () => {
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  const { openForm } = useBiddingForm();
+
 
   const stories = [
     {
@@ -247,9 +250,13 @@ const HappyStories = () => {
               Join thousands of happy customers who found their perfect wrap shop
               through Bidawrap
             </p>
-            <button className="px-8 py-4 bg-background text-foreground rounded-lg font-semibold hover:bg-background/90 transition-colors">
-              Get Your Free Bid Today
+            <button
+              onClick={openForm}
+              className="px-8 py-4 bg-background text-foreground rounded-lg font-semibold hover:bg-background/90 transition-colors"
+            >
+              Get a Bid
             </button>
+
           </div>
         </div>
       </div>

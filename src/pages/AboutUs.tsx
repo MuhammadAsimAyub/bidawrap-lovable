@@ -4,12 +4,15 @@ import { CheckCircle, Shield, Users, TrendingUp } from "lucide-react";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import carImage from "@/assets/blackcar.jpg"; // ⬅️ update filename to match your actual image
+import { useBiddingForm } from "@/contexts/BiddingFormContext";
 
 
 
 const AboutUs = () => {
   const statsRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const { openForm } = useBiddingForm();
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -237,9 +240,13 @@ const AboutUs = () => {
                 Join thousands of customers and shops who trust Bidawrap.com for their wrap needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 bg-background text-foreground rounded-lg font-semibold hover:bg-background/90 transition-colors">
+                <button
+                  onClick={openForm}
+                  className="px-8 py-4 bg-background text-foreground rounded-lg font-semibold hover:bg-background/90 transition-colors"
+                >
                   Get a Bid
                 </button>
+
                 <button className="px-8 py-4 bg-primary-foreground/10 text-primary-foreground rounded-lg font-semibold hover:bg-primary-foreground/20 transition-colors border-2 border-primary-foreground/30" onClick={() => navigate('/partner')}>
                   Join as a Shop
                 </button>

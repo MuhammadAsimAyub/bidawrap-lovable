@@ -6,6 +6,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { usePartnerAuth } from "@/contexts/PartnerAuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.avif"; // ✅ adjust path if needed
+import { motion } from "framer-motion";
+
 
 import {
   DropdownMenu,
@@ -40,21 +42,35 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
 
-
-          <div
-            className="flex items-center justify-center 
-             bg-white dark:bg-white/20
-             leading-none"
+          <motion.div
+            className="flex items-center w-14 h-14 justify-center 
+  ml-3
+  bg-white dark:bg-gray-400
+  rounded
+  leading-none"
             style={{
               display: "inline-flex",
             }}
+            whileHover={{
+              scale: 1.08,
+              boxShadow: "0 0 15px rgba(250, 204, 21, 0.5)", // soft yellow glow
+            }}
+            whileTap={{
+              scale: 0.95,
+              rotate: [-2, 2, -1, 0], // small jiggle on click
+            }}
+            transition={{
+              duration: 0.3,
+              ease: "easeInOut",
+            }}
           >
             <img
-              src="https://static.wixstatic.com/media/eb1ca3_1f73e77ae4db4f63aef00c632ab27916~mv2.png/v1/fill/w_92,h_96,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logonew.png"
+              src={logo}
               alt="Bid A Wrap Logo"
-              className="w-16 h-16 sm:w-24 sm:h-20 object-contain block"
+              className="w-16 h-16 sm:w-16 sm:h-16 object-contain block"
             />
-          </div>
+          </motion.div>
+
 
 
 
@@ -115,6 +131,15 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
               Get a Bid
             </Button>
 
+
+
+
+
+
+
+
+
+
             {/* Account Button/Dropdown */}
             {isPartnerAuthenticated ? (
               <>
@@ -122,16 +147,21 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="sm:hidden rounded-full"
+                  className="sm:hidden rounded-full border border-gray-300 dark:border-gray-700 bg-white/60 dark:bg-gray-800/40 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm"
                   onClick={() => navigate("/partner/dashboard")}
                 >
-                  <Store className="h-5 w-5 text-primary" />
+                  <Store className="h-5 w-5 text-yellow-500 dark:text-yellow-400" />
                 </Button>
+
                 {/* Desktop - Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="hidden sm:flex rounded-full">
-                      <Store className="h-5 w-5 text-primary" />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="hidden sm:flex rounded-full border border-gray-300 dark:border-gray-700 bg-white/60 dark:bg-gray-800/40 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm"
+                    >
+                      <Store className="h-5 w-5 text-yellow-500 dark:text-yellow-400" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48 bg-card border-border">
@@ -150,32 +180,21 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="sm:hidden rounded-full"
+                  className="sm:hidden rounded-full border border-gray-300 dark:border-gray-700 bg-white/60 dark:bg-gray-800/40 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm"
                   onClick={() => navigate("/dashboard")}
                 >
-                  {user?.avatar ? (
-                    <img
-                      src={user.avatar}
-                      alt={user.name}
-                      className="w-8 h-8 rounded-full"
-                    />
-                  ) : (
-                    <User className="h-5 w-5" />
-                  )}
+                  <User className="h-5 w-5 text-yellow-500 dark:text-yellow-400" />
                 </Button>
+
                 {/* Desktop - Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="hidden sm:flex rounded-full">
-                      {user?.avatar ? (
-                        <img
-                          src={user.avatar}
-                          alt={user.name}
-                          className="w-8 h-8 rounded-full"
-                        />
-                      ) : (
-                        <User className="h-5 w-5" />
-                      )}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="hidden sm:flex rounded-full border border-gray-300 dark:border-gray-700 bg-white/60 dark:bg-gray-800/40 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm"
+                    >
+                      <User className="h-5 w-5 text-yellow-500 dark:text-yellow-400" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48 bg-card border-border">
@@ -193,6 +212,13 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
                 Sign In
               </Button>
             )}
+
+
+
+
+
+
+
 
             {/* Mobile Menu Button */}
             <Button
