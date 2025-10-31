@@ -105,7 +105,6 @@ const FeaturesSection = () => {
                   <div className="absolute bottom-6 left-6 right-6 text-white">
                     <div className="flex items-center gap-2 mb-2">
                       <Award className="w-5 h-5" />
-                      <span className="text-sm font-semibold">Premium Wrap</span>
                     </div>
                     <p className="text-xs opacity-90">Professional transformation by verified shops</p>
                   </div>
@@ -127,7 +126,7 @@ const FeaturesSection = () => {
                 <div className="absolute -inset-2 bg-gradient-to-r from-accent via-primary to-accent rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
                 <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                   <img
-                    src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80"
+                    src="/car-31.png"
                     alt="Professional car detailing"
                     className="relative w-full h-[280px] sm:h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition duration-700"
                   />

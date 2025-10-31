@@ -171,25 +171,43 @@ const AboutUs = () => {
 
             {/* Image Gallery Section */}
             <div className="grid md:grid-cols-3 gap-6 observe-animation opacity-0">
-              <div className="relative h-64 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl border-2 border-dashed border-primary/30 flex items-center justify-center group hover:border-primary/50 transition-colors overflow-hidden">
-                <div className="text-center text-muted-foreground">
-                  <div className="text-3xl mb-2">🎨</div>
-                  <p className="text-sm">Color Change Wrap</p>
+              {/* Color Change Wrap */}
+              <div className="relative h-64 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl border-2 border-dashed border-primary/30 flex items-center justify-center group hover:border-primary/50 transition-colors overflow-hidden">
+                <img
+                  src="/car-27.png"
+                  alt="Color Change Wrap"
+                  className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <div className="relative text-center text-white bg-black/40 px-4 py-2 rounded-md backdrop-blur-sm">
+                  <p className="text-sm font-semibold">Color Change Wrap</p>
                 </div>
               </div>
+
+              {/* Paint Protection Film */}
               <div className="relative h-64 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl border-2 border-dashed border-primary/30 flex items-center justify-center group hover:border-primary/50 transition-colors overflow-hidden">
-                <div className="text-center text-muted-foreground">
-                  <div className="text-3xl mb-2">🛡️</div>
-                  <p className="text-sm">Paint Protection Film</p>
+                <img
+                  src="/car-30.png"
+                  alt="Paint Protection Film"
+                  className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <div className="relative text-center text-white bg-black/40 px-4 py-2 rounded-md backdrop-blur-sm">
+                  <p className="text-sm font-semibold">Paint Protection Film</p>
                 </div>
               </div>
+
+              {/* Commercial Graphics */}
               <div className="relative h-64 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl border-2 border-dashed border-primary/30 flex items-center justify-center group hover:border-primary/50 transition-colors overflow-hidden">
-                <div className="text-center text-muted-foreground">
-                  <div className="text-3xl mb-2">📊</div>
-                  <p className="text-sm">Commercial Graphics</p>
+                <img
+                  src="/car-29.png"
+                  alt="Commercial Graphics"
+                  className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <div className="relative text-center text-white bg-black/40 px-4 py-2 rounded-md backdrop-blur-sm">
+                  <p className="text-sm font-semibold">Commercial Graphics</p>
                 </div>
               </div>
             </div>
+
 
             {/* Stats Section */}
             <div ref={statsRef} className="grid md:grid-cols-3 gap-6 observe-animation opacity-0">

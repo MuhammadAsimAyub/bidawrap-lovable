@@ -8,101 +8,151 @@ const HappyStories = () => {
   const stories = [
     {
       id: 1,
-      name: "Sarah Mitchell",
+      name: "Michael Carter",
       rating: 5,
-      story: "I was nervous about wrapping my Tesla, but the shop made everything so easy! The color change wrap exceeded my expectations. It's been 8 months and still looks brand new. Everyone asks where I got it done!",
+      story:
+        "Posting a bid was so quick! Within hours, I started receiving offers from verified wrap shops. The whole process felt transparent and smooth.",
+      image: "/car-14.png",
     },
     {
       id: 2,
-      name: "James Rodriguez",
+      name: "Emily Johnson",
       rating: 5,
-      story: "Got my BMW wrapped in matte black and I'm obsessed! The installer was patient with all my questions and the attention to detail was incredible. Worth every penny. Bidawrap connected me with the perfect shop.",
+      story:
+        "I loved how easy it was to compare offers. The website layout is clean, and I could see ratings, portfolios, and prices before deciding.",
+      image: "/car7.png",
     },
     {
       id: 3,
-      name: "Emily Chen",
+      name: "Lucas Bennett",
       rating: 5,
-      story: "PPF installation was flawless! My white Porsche stays pristine even after daily driving. The shop was professional, clean, and finished on time. I received 5 competitive bids and chose the best one. Great experience!",
+      story:
+        "Bidawrap made the entire process effortless. I received multiple offers, countered one, and confirmed the deal the same day. Excellent system!",
+      image: "/car-22.png",
     },
     {
       id: 4,
-      name: "Marcus Johnson",
+      name: "Sophie Martin",
       rating: 5,
-      story: "Wrapped my food truck with custom graphics through Bidawrap. The design and installation were phenomenal. My sales increased by 60% in the first month! The platform made finding the right shop stress-free.",
+      story:
+        "The platform feels professional. The shops are responsive, polite, and clearly experienced. I had my wrap scheduled within 24 hours of posting.",
+      image: "/car-4.png",
     },
     {
       id: 5,
-      name: "Isabella Santos",
+      name: "Ethan Miller",
       rating: 5,
-      story: "Chrome delete and window tint for my Range Rover. The transformation is stunning! The shop was recommended through Bidawrap and they delivered beyond expectations. Professional, affordable, and beautiful work.",
+      story:
+        "Everything about Bidawrap feels seamless. From signing up to accepting a bid — it’s designed perfectly. Definitely recommending to friends.",
+      image: "/car-5.png",
     },
     {
       id: 6,
-      name: "David Park",
+      name: "Olivia Thompson",
       rating: 5,
-      story: "Full PPF coverage on my brand new Corvette. The installer took their time and did it perfectly. Not a single bubble or edge lift. Protected my investment and the car looks even better now!",
+      story:
+        "I was amazed at how quickly I got professional responses. The website is super user-friendly and clear. Loved the bidding system!",
+      image: "/car-6.png",
     },
     {
       id: 7,
-      name: "Olivia Thompson",
+      name: "Noah Williams",
       rating: 5,
-      story: "Satin wrap on my Audi gave it a completely new personality! I got multiple bids through Bidawrap and saved over $1,500 compared to other quotes. The quality is outstanding and the process was so simple.",
+      story:
+        "I appreciated the transparency — I could negotiate with multiple shops and choose based on quality and pricing. Smooth experience!",
+      image: "/car-25.png",
     },
     {
       id: 8,
-      name: "Carlos Mendez",
+      name: "Chloe Davis",
       rating: 5,
-      story: "Commercial wrap for my three delivery vans. The team finished all vehicles in one week and they look incredible. My brand visibility has skyrocketed. Bidawrap made it easy to find verified professionals.",
+      story:
+        "Customer support was very responsive and guided me through my first bid. The process was fast, and the result was better than I expected!",
+      image: "/car-8.png",
     },
     {
       id: 9,
-      name: "Sophia Anderson",
+      name: "James Anderson",
       rating: 5,
-      story: "Color change wrap from white to deep blue on my Mercedes. It's like driving a brand new car! The shop was meticulous and the finish is showroom quality. I get compliments everywhere I go.",
+      story:
+        "Posting a bid took less than a minute. Got 4 offers from verified shops. Accepted one easily — the platform really works as promised!",
+      image: "/car-24.png",
     },
     {
       id: 10,
-      name: "Ryan Foster",
+      name: "Isabella Moore",
       rating: 5,
-      story: "PPF and ceramic coating combo for my Mustang GT. The protection is incredible and the shine is unreal. Found the perfect shop through Bidawrap with transparent pricing. Best decision I made!",
+      story:
+        "This platform saves so much time. No endless searching or calling — just bids, reviews, and options in one place. Super professional.",
+      image: "/car-10.png",
     },
     {
       id: 11,
-      name: "Mia Williams",
+      name: "Henry Walker",
       rating: 5,
-      story: "Wrapped my G-Wagon in rose gold chrome and it's absolutely stunning! The installer was an artist. Took their time to get every curve perfect. Worth the wait and the investment. Highly recommend Bidawrap!",
+      story:
+        "I really liked the bidding system. It gives fair competition between shops, and I got a great deal without any hidden costs.",
+      image: "/car-11.png",
     },
     {
       id: 12,
-      name: "Alex Turner",
+      name: "Amélie Laurent",
       rating: 5,
-      story: "Full vehicle wrap for my business with custom logo design. The shop handled everything from concept to installation. My mobile billboard is turning heads everywhere. Revenue is up 45% since the wrap!",
+      story:
+        "Everything from login to booking was smooth. The website feels modern and trustworthy. Excellent job from the Bidawrap team!",
+      image: "/car-12.png",
     },
     {
       id: 13,
-      name: "Hannah Lee",
+      name: "Jack Robinson",
       rating: 5,
-      story: "Gloss black wrap on my Jeep Wrangler looks aggressive and clean! The shop was recommended by Bidawrap and they were amazing. Professional, fast, and the quality exceeded my expectations.",
+      story:
+        "I’ve used many online services, but Bidawrap stands out. The shops communicate professionally, and I loved the tracking updates.",
+      image: "/car-13.png",
     },
     {
       id: 14,
-      name: "Daniel Brooks",
+      name: "Charlotte Dupont",
       rating: 5,
-      story: "PPF on the front end of my Lamborghini. Rock chips are no longer a concern! The installation was perfect and invisible. The shop's expertise gave me total confidence. Found them through Bidawrap's verified network.",
+      story:
+        "Loved the experience! The platform made everything so convenient. I got my wrap done on time with full clarity from start to finish.",
+      image: "/car-22.png",
     },
     {
       id: 15,
-      name: "Victoria Martinez",
+      name: "Liam Parker",
       rating: 5,
-      story: "Wrapped my Lexus in pearlescent white and it changes color in different lighting! Absolutely magical. The craftsmanship was top-tier and the price was competitive. Bidawrap connected me with true professionals.",
+      story:
+        "Posting a bid, reviewing offers, chatting with shops — everything works perfectly. The whole process feels automated yet personal.",
+      image: "/car-23.png",
     },
     {
       id: 16,
-      name: "Nathan Cooper",
+      name: "Emma Wilson",
       rating: 5,
-      story: "Full wrap and window tint package for my Camaro. The transformation is insane! From boring to breathtaking. Got 6 bids through Bidawrap and chose the best value. The shop delivered perfection!",
+      story:
+        "Bidawrap is an amazing idea! It connects you with real professionals without any hassle. The platform is simple, modern, and reliable.",
+      image: "/car-3.png",
     },
+    {
+      id: 17,
+      name: "Daniel Roberts",
+      rating: 4,
+      story:
+        "I was surprised by how quickly I got multiple offers for my wrap job. The entire process was smooth, and I ended up saving money too!",
+      image: "/car-1.png",
+    },
+    {
+      id: 18,
+      name: "Sophia Turner",
+      rating: 5,
+      story:
+        "Absolutely loved my experience with Bidawrap! The team helped me find a professional who did an incredible job on my car wrap.",
+      image: "/car-2.png",
+    },
+
   ];
+
 
   const toggleFlip = (id: number) => {
     setFlippedCards((prev) =>
@@ -114,17 +164,22 @@ const HappyStories = () => {
     <Layout>
       <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-background via-background to-primary/5 py-20">
         <div className="container mx-auto px-4">
+          {/* Heading */}
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-4 gradient-text">Happy Customer Stories</h1>
+            <h1 className="text-5xl font-bold mb-4 gradient-text">
+              Happy Customer Stories
+            </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Real experiences from customers who found their perfect shop through Bidawrap
+              Real experiences from customers who found their perfect shop
+              through Bidawrap
             </p>
             <p className="text-sm text-primary mt-4 font-semibold">
               Click on any card to read the full story!
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {/* Stories Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {stories.map((story) => (
               <div
                 key={story.id}
@@ -132,26 +187,27 @@ const HappyStories = () => {
                 onClick={() => toggleFlip(story.id)}
               >
                 <div
-                  className={`flip-card-inner ${
-                    flippedCards.includes(story.id) ? "flipped" : ""
-                  }`}
+                  className={`flip-card-inner ${flippedCards.includes(story.id) ? "flipped" : ""
+                    }`}
                 >
-                  {/* Front Side - Image */}
+                  {/* Front Side - Car Image */}
                   <div className="flip-card-front">
-                    <div className="relative w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl border-2 border-dashed border-primary/30 flex flex-col items-center justify-center p-6 group hover:border-primary/50 transition-colors">
-                      <div className="text-6xl mb-4">🚗</div>
-                      <p className="text-sm text-muted-foreground text-center">
-                        Car image placeholder
-                      </p>
-                      <p className="text-xs text-primary mt-2 font-semibold">
-                        Click to read story
-                      </p>
+                    <div className="relative w-full rounded-xl border-2 border-dashed border-primary/30 overflow-hidden group hover:border-primary/50 transition-colors bg-background">
+                      <img
+                        src={story.image}
+                        alt={story.name}
+                        className="w-full h-64 object-full rounded-xl"
+                      />
+                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white">
+                        <p className="text-sm">Click to read story</p>
+                      </div>
                       <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1">
                         <Star className="w-4 h-4 text-primary fill-primary" />
                         <span className="text-sm font-bold">{story.rating}</span>
                       </div>
                     </div>
                   </div>
+
 
                   {/* Back Side - Story */}
                   <div className="flip-card-back">
@@ -188,7 +244,8 @@ const HappyStories = () => {
               Ready to Create Your Own Success Story?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Join thousands of happy customers who found their perfect wrap shop through Bidawrap
+              Join thousands of happy customers who found their perfect wrap shop
+              through Bidawrap
             </p>
             <button className="px-8 py-4 bg-background text-foreground rounded-lg font-semibold hover:bg-background/90 transition-colors">
               Get Your Free Bid Today
@@ -197,6 +254,7 @@ const HappyStories = () => {
         </div>
       </div>
 
+      {/* Flip Card CSS */}
       <style>{`
         .flip-card {
           perspective: 1000px;

@@ -5,6 +5,8 @@ import { useTheme } from "next-themes";
 import { useAuth } from "@/contexts/AuthContext";
 import { usePartnerAuth } from "@/contexts/PartnerAuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import logo from "@/assets/logo.avif"; // ✅ adjust path if needed
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,14 +37,28 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-primary to-[hsl(75,100%,45%)] flex items-center justify-center font-bold text-primary-foreground text-lg sm:text-xl">
-              W
-            </div>
-            <span className="ml-2 text-lg sm:text-xl font-bold">WrapBid</span>
+
+
+          <div
+            className="flex items-center justify-center 
+             bg-white dark:bg-white/20
+             leading-none"
+            style={{
+              display: "inline-flex",
+            }}
+          >
+            <img
+              src="https://static.wixstatic.com/media/eb1ca3_1f73e77ae4db4f63aef00c632ab27916~mv2.png/v1/fill/w_92,h_96,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logonew.png"
+              alt="Bid A Wrap Logo"
+              className="w-16 h-16 sm:w-24 sm:h-20 object-contain block"
+            />
           </div>
+
+
+
+
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
@@ -53,9 +69,8 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
                   <Button
                     variant="ghost"
                     onClick={() => navigate(link.href)}
-                    className={`text-foreground/80 hover:text-foreground hover:bg-primary/10 transition-colors ${
-                      isActive ? "text-foreground" : ""
-                    }`}
+                    className={`text-foreground/80 hover:text-foreground hover:bg-primary/10 transition-colors ${isActive ? "text-foreground" : ""
+                      }`}
                   >
                     {link.label}
                   </Button>
@@ -204,9 +219,8 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
                       navigate(link.href);
                       setIsMenuOpen(false);
                     }}
-                    className={`w-full justify-start text-foreground/80 hover:text-foreground hover:bg-primary/10 ${
-                      isActive ? "text-foreground bg-primary/5" : ""
-                    }`}
+                    className={`w-full justify-start text-foreground/80 hover:text-foreground hover:bg-primary/10 ${isActive ? "text-foreground bg-primary/5" : ""
+                      }`}
                   >
                     {link.label}
                   </Button>
@@ -220,7 +234,7 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
               <Button onClick={onGetBidClick} className="btn-primary w-full">
                 Get a Bid
               </Button>
-              
+
               {/* Logout button for authenticated users on mobile */}
               {isPartnerAuthenticated && (
                 <Button
@@ -234,7 +248,7 @@ const Navbar = ({ onGetBidClick }: NavbarProps) => {
                   Logout
                 </Button>
               )}
-              
+
               {isAuthenticated && !isPartnerAuthenticated && (
                 <Button
                   variant="ghost"
