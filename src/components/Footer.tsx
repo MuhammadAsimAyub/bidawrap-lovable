@@ -1,4 +1,8 @@
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
+import logo from "@/assets/logo.avif"; // ✅ adjust path if needed
+import { motion } from "framer-motion";
+
+
 
 const Footer = () => {
   const socialLinks = [
@@ -21,11 +25,36 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8 items-center">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-[hsl(75,100%,45%)] flex items-center justify-center font-bold text-primary-foreground text-2xl">
-              W
-            </div>
+            <motion.div
+            className="flex items-center w-14 h-14 justify-center 
+  ml-3
+  bg-white dark:bg-gray-400
+  rounded
+  leading-none"
+            style={{
+              display: "inline-flex",
+            }}
+            whileHover={{
+              scale: 1.08,
+              boxShadow: "0 0 15px rgba(250, 204, 21, 0.5)", // soft yellow glow
+            }}
+            whileTap={{
+              scale: 0.95,
+              rotate: [-2, 2, -1, 0], // small jiggle on click
+            }}
+            transition={{
+              duration: 0.3,
+              ease: "easeInOut",
+            }}
+          >
+            <img
+              src={logo}
+              alt="Bid A Wrap Logo"
+              className="w-16 h-16 sm:w-16 sm:h-16 object-contain block"
+            />
+          </motion.div>
             <div>
-              <div className="text-xl font-bold">WrapBid</div>
+              <div className="text-xl font-bold">Bid a Wrap</div>
               <div className="text-sm text-muted-foreground">Premium Vehicle Services</div>
             </div>
           </div>
